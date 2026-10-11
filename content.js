@@ -18,7 +18,7 @@ window.SITE = {
     headline: "AI-Focused Software Developer",
     location: "Andhra Pradesh, India",
     email: "miryalaindramadesh@gmail.com",
-    phone: "",                                 // optional, e.g. "+91 98765 43210" (leave "" to hide)
+    phone: "+91 7989233927",                                 // optional, e.g. "+91 98765 43210" (leave "" to hide)
     photo: "assets/photo.jpg",                 // put your photo at this path
     resumePdf: "assets/resume.pdf",            // put your resume PDF at this path
 

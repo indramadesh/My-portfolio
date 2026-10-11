@@ -97,7 +97,7 @@
         (P.photo ? '<img src="' + esc(P.photo) + '" alt="Portrait of ' + esc(P.name) + '" onerror="this.remove()" />' : "") +
       "</div>" +
       '<div class="hero-text">' +
-        '<h1 class="hello">Hello</h1>' +
+        '<h1 class="hello">Hello !!</h1>' +
         '<h2 class="about-title">A Bit About Me</h2>' +
         paras(P.about, "about-text") +
         '<div class="circle-block">' +
