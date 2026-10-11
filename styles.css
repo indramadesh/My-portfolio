@@ -1,0 +1,501 @@
+/* ==========================================================
+   Indra Madesh Miryala — portfolio
+   Recreates the Wix "Creative CV" template (#2846, demo "nicol-rider").
+   Palette, type scale and widths are read from the template's theme.
+   ========================================================== */
+
+:root {
+  /* Template palette */
+  --bg: #f3f3f3;              /* color_11  page background */
+  --ink: #000000;             /* color_15  text */
+  --rule: #c7c7c7;            /* color_13  dividers */
+  --muted: #727272;           /* color_6 */
+  --orange: #eea302;          /* color_42  Resume circle, Submit */
+  --orange-dark: #593e03;     /* color_43 */
+  --red: #ff3b25;             /* color_23  Projects circle */
+  --red-dark: #55140c;        /* color_25 */
+  --teal: #80d8da;            /* color_28  Contact circle */
+  --teal-dark: #135454;       /* color_30 */
+  --active: #926402;          /* color_18  active nav link */
+
+  /* Template fonts: Work Sans SemiBold + Avenir Light (Nunito Sans is the closest free match) */
+  --font-head: "Work Sans", Arial, sans-serif;
+  --font-body: "Nunito Sans", "Avenir Next", Avenir, Arial, sans-serif;
+
+  --site-width: 980px;
+  --gutter: 40px;
+}
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, p, ul { margin: 0; }
+h1, h2, h3 { font-family: var(--font-head); font-weight: 600; }
+img { display: block; max-width: 100%; }
+a { color: inherit; }
+b, strong { font-weight: 700; }
+[hidden] { display: none !important; }
+
+:focus-visible { outline: 2px solid var(--active); outline-offset: 3px; }
+
+.skip-link {
+  position: absolute;
+  left: 16px;
+  top: -60px;
+  z-index: 100;
+  padding: 8px 14px;
+  background: var(--ink);
+  color: #fff;
+  text-decoration: none;
+}
+.skip-link:focus { top: 12px; }
+
+.container {
+  width: 100%;
+  max-width: calc(var(--site-width) + 2 * 24px);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+main { flex: 1; }
+
+/* ---------- Header ---------- */
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 22px var(--gutter);
+}
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+}
+.brand-dot {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--orange);
+  flex: none;
+}
+.brand-name {
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 1;
+}
+.brand-role { font-size: 15px; line-height: 1; margin-left: 2px; }
+
+.nav {
+  display: flex;
+  padding: 0;
+  list-style: none;
+}
+.nav li + li { border-left: 1px solid var(--ink); }
+.nav a {
+  display: block;
+  padding: 0 16px;
+  font-size: 15px;
+  line-height: 22px;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+.nav li:last-child a { padding-right: 15px; }
+.nav a:hover,
+.nav a[aria-current="page"] { color: var(--active); }
+
+/* ---------- Footer ---------- */
+.site-footer { padding: 0 var(--gutter) 40px; }
+.footer-inner {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr) auto;
+  gap: 24px;
+  padding: 36px 10px 0;
+  border-top: 1px solid var(--rule);
+}
+.footer-col h2 {
+  font-size: 18px;
+  line-height: 1.4;
+  margin-bottom: 4px;
+}
+.footer-col p,
+.footer-col a { font-size: 15px; }
+.footer-col a { text-decoration: none; }
+.footer-col a:hover { text-decoration: underline; }
+.social { display: flex; gap: 10px; margin-top: 6px; }
+.social a { display: inline-flex; }
+.social svg { width: 18px; height: 18px; fill: var(--ink); transition: fill 0.2s ease; }
+.social a:hover svg { fill: var(--active); }
+.copyright { font-size: 13px; line-height: 1.4; padding-top: 8px; }
+
+/* ---------- Page title (Resume / Projects / Contact) ---------- */
+.page { padding-top: 56px; padding-bottom: 96px; }
+.page-title {
+  font-size: 42px;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+}
+
+/* ---------- Home ---------- */
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  min-height: calc(100vh - 70px - 140px);
+  padding: 72px 24px 120px;
+}
+.hero-photo {
+  position: relative;
+  width: 480px;
+  height: 480px;
+  flex: none;
+  border-radius: 50%;
+  overflow: hidden;
+  background: #d9d9d9;
+}
+/* Initials show only while assets/photo.jpg is missing */
+.hero-photo::before {
+  content: "IM";
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-size: 120px;
+  color: #a8a8a8;
+}
+.hero-photo img {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(100%);
+}
+.hero-text { max-width: 460px; }
+.hello {
+  font-size: 100px;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+.about-title {
+  margin-top: 28px;
+  font-size: 22px;
+  line-height: 1.4;
+}
+.about-text { margin-top: 6px; line-height: 1.6; }
+
+.circle-block {
+  /* Shrinks to the width of the three circles so the Contact button centres under the middle one */
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 40px;
+  margin-left: -12px;
+}
+.circles { display: flex; gap: 17px; }
+.circle {
+  display: grid;
+  place-items: center;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  border: 1px solid;
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-size: 22px;
+  text-decoration: none;
+  color: var(--ink);
+  transition: background-color 0.25s ease;
+}
+.circle-orange { background: var(--orange); border-color: var(--orange-dark); }
+.circle-red { background: var(--red); border-color: var(--red-dark); }
+.circle-teal { background: var(--teal); border-color: var(--teal-dark); }
+.circle:hover { background: var(--bg); }
+
+/* Small Contact button under the circles */
+.btn-contact {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  margin-top: 24px;
+  padding: 0 26px;
+  border: 1px solid var(--ink);
+  border-radius: 999px;
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-size: 15px;
+  text-decoration: none;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+.btn-contact:hover { background: var(--ink); color: var(--bg); }
+
+/* ---------- Resume ---------- */
+.resume-actions { margin-top: 10px; font-size: 15px; }
+.resume-section {
+  display: grid;
+  grid-template-columns: 1fr 470px;
+  gap: 24px;
+  padding: 56px 0 52px;
+}
+.resume-section + .resume-section { border-top: 1px solid var(--rule); }
+.resume-section:first-of-type { padding-top: 48px; }
+.resume-section > h2 {
+  font-size: 22px;
+  line-height: 1.4;
+  max-width: 150px;
+}
+.timeline { display: grid; gap: 40px; }
+.tl-item {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 0;
+}
+.tl-date { font-size: 14px; line-height: 1.7; padding-top: 1px; }
+.tl-title {
+  font-size: 16px;
+  line-height: 1.4;
+}
+.tl-body p { font-size: 14px; line-height: 1.85; margin-top: 6px; max-width: 340px; }
+.tl-body .tl-meta { margin-top: 2px; color: var(--muted); }
+.bullet-list {
+  padding-left: 120px;
+  list-style: none;
+}
+.bullet-list li {
+  position: relative;
+  padding-left: 16px;
+  font-size: 14px;
+  line-height: 2.1;
+  max-width: 360px;
+}
+.bullet-list li::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 0.95em;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--ink);
+}
+.bullet-list li + li { margin-top: 8px; }
+
+/* ---------- Projects ---------- */
+.project {
+  display: grid;
+  grid-template-columns: 1fr 490px;
+  gap: 48px;
+  align-items: start;
+  padding-top: 104px;
+}
+.project:first-of-type { padding-top: 72px; }
+.project h2 {
+  font-size: 26px;
+  line-height: 1.3;
+  padding-top: 6px;
+}
+.project-body { max-width: 430px; }
+.project-body p { font-size: 14px; line-height: 1.85; margin-top: 12px; }
+.project-tags { color: var(--muted); }
+.status {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 2px 10px;
+  border: 1px solid var(--ink);
+  border-radius: 999px;
+  font-size: 12px;
+  line-height: 1.6;
+}
+.project-links { display: flex; flex-wrap: wrap; gap: 6px 20px; margin-top: 14px; font-size: 14px; }
+.project-links a { text-underline-offset: 3px; }
+.project-links a:hover { color: var(--active); }
+.project-media {
+  margin: 0;
+  aspect-ratio: 350 / 236;
+  overflow: hidden;
+  background: #e3e3e3;
+}
+.project-media img { width: 100%; height: 100%; object-fit: cover; object-position: top left; }
+.project-media.placeholder {
+  display: grid;
+  place-items: center;
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-size: 20px;
+  color: #8a8a8a;
+  text-align: center;
+  padding: 24px;
+}
+
+/* ---------- Contact ---------- */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 432px;
+  gap: 48px;
+  align-items: start;
+}
+.contact-intro p.lead { font-size: 15px; margin-top: 4px; }
+.contact-item { margin-top: 26px; }
+.contact-item + .contact-item { margin-top: 14px; }
+.contact-item h2 { font-size: 16px; line-height: 1.4; }
+.contact-item p, .contact-item a { font-size: 14px; }
+.contact-item a { text-decoration: none; }
+.contact-item a:hover { text-decoration: underline; }
+
+.form { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 24px; padding-top: 12px; }
+.field { display: flex; flex-direction: column; gap: 6px; }
+.field.full { grid-column: 1 / -1; }
+.field label { font-size: 14px; line-height: 1.4; }
+.field input,
+.field textarea {
+  width: 100%;
+  height: 41px;
+  padding: 8px 10px;
+  background: transparent;
+  border: 1px solid #383838;
+  border-radius: 0;
+  color: var(--ink);
+  font: inherit;
+  font-size: 15px;
+}
+.field textarea { height: 92px; resize: vertical; }
+.field input:focus,
+.field textarea:focus { outline: none; border-color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink); }
+.field[data-invalid="true"] input,
+.field[data-invalid="true"] textarea { border-color: #c4161c; box-shadow: inset 0 0 0 1px #c4161c; }
+.error { font-size: 12px; color: #c4161c; }
+.btn-submit {
+  grid-column: 1 / -1;
+  height: 50px;
+  margin-top: 10px;
+  border: 1px solid var(--orange-dark);
+  border-radius: 999px;
+  background: var(--orange);
+  color: var(--ink);
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-size: 20px;
+  cursor: pointer;
+  transition: background-color 0.25s ease;
+}
+.btn-submit:hover { background: var(--bg); }
+.form-status { grid-column: 1 / -1; font-size: 14px; min-height: 1.6em; }
+
+/* ==========================================================
+   Responsive
+   ========================================================== */
+@media (max-width: 1080px) {
+  .hero-photo { width: 380px; height: 380px; }
+  .hello { font-size: 84px; }
+  .project, .resume-section { grid-template-columns: 1fr 1fr; }
+  .contact-grid { grid-template-columns: 1fr 1.2fr; }
+}
+
+@media (max-width: 820px) {
+  :root { --gutter: 20px; }
+
+  .site-header { flex-direction: column; align-items: flex-start; gap: 14px; padding: 18px var(--gutter); }
+  .nav li:first-child a { padding-left: 0; }
+  .brand-name { font-size: 19px; white-space: nowrap; }
+
+  .hero { flex-direction: column; gap: 32px; min-height: 0; padding: 32px 20px 72px; }
+  .hero-photo { width: min(300px, 80vw); height: min(300px, 80vw); }
+  .hero-photo::before { font-size: 80px; }
+  .hello { font-size: 64px; }
+  .circle-block { margin-left: 0; }
+  .circles { gap: 12px; }
+  .circle { width: 100px; height: 100px; font-size: 17px; }
+
+  .page { padding-top: 32px; padding-bottom: 64px; }
+  .container { padding: 0 20px; }
+  .page-title { font-size: 34px; }
+
+  .resume-section { grid-template-columns: 1fr; gap: 20px; padding: 40px 0; }
+  .resume-section > h2 { max-width: none; }
+  .tl-item { grid-template-columns: 1fr; }
+  .tl-date { color: var(--muted); }
+  .bullet-list { padding-left: 0; }
+
+  .project, .project:first-of-type { grid-template-columns: 1fr; gap: 20px; padding-top: 56px; }
+  .project-media { order: -1; }
+
+  .contact-grid { grid-template-columns: 1fr; gap: 32px; }
+
+  .footer-inner { grid-template-columns: 1fr 1fr; padding: 28px 0 0; }
+}
+
+@media (max-width: 420px) {
+  .brand-role { display: none; }
+  .form { grid-template-columns: 1fr; }
+  .footer-inner { grid-template-columns: 1fr; }
+  .circle { width: 92px; height: 92px; font-size: 16px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}
+
+/* ---------- Skills page ---------- */
+.page-lead { margin-top: 10px; font-size: 16px; max-width: 620px; }
+.skill-groups { display: grid; gap: 32px; }
+.skill-group h3 { font-size: 16px; line-height: 1.4; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; padding: 0; list-style: none; }
+.chips li {
+  padding: 4px 14px;
+  border: 1px solid var(--ink);
+  border-radius: 999px;
+  font-size: 14px;
+  line-height: 1.6;
+  background: transparent;
+  transition: background-color 0.2s ease;
+}
+.chips li:hover { background: #fff; }
+.used-in { margin-top: 10px; font-size: 13px; color: var(--muted); }
+
+.link-list { display: grid; padding: 0; list-style: none; }
+.link-list li + li { border-top: 1px solid var(--rule); }
+.link-list a {
+  display: grid;
+  grid-template-columns: 22px 160px 1fr;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 0;
+  text-decoration: none;
+}
+.link-icon svg { width: 18px; height: 18px; fill: var(--ink); display: block; }
+.link-label { font-family: var(--font-head); font-weight: 600; font-size: 15px; }
+.link-url { font-size: 14px; color: var(--muted); overflow-wrap: anywhere; }
+.link-list a:hover .link-url { color: var(--active); text-decoration: underline; }
+.link-list a:hover .link-icon svg { fill: var(--active); }
+
+.status-inline { margin: 0 0 0 8px; padding: 0 8px; font-family: var(--font-body); font-weight: 400; font-size: 11px; vertical-align: 2px; }
+.text-link { text-underline-offset: 3px; }
+.text-link:hover { color: var(--active); }
+.tl-body p .text-link { font-size: 14px; }
+
+@media (max-width: 820px) {
+  .link-list a { grid-template-columns: 22px 1fr; row-gap: 2px; }
+  .link-url { grid-column: 2; }
+}
