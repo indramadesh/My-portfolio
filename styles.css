@@ -252,7 +252,25 @@ main { flex: 1; }
 .btn-contact:hover { background: var(--ink); color: var(--bg); }
 
 /* ---------- Resume ---------- */
-.resume-actions { margin-top: 10px; font-size: 15px; }
+.resume-actions { margin-top: 18px; }
+.btn-dark {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  height: 44px;
+  padding: 0 24px;
+  background: var(--ink);
+  color: #fff;
+  border: 1px solid var(--ink);
+  border-radius: 999px;
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-size: 15px;
+  text-decoration: none;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+.btn-dark svg { width: 16px; height: 16px; fill: currentColor; }
+.btn-dark:hover { background: transparent; color: var(--ink); }
 .resume-section {
   display: grid;
   grid-template-columns: 1fr 470px;
@@ -328,9 +346,25 @@ main { flex: 1; }
   font-size: 12px;
   line-height: 1.6;
 }
-.project-links { display: flex; flex-wrap: wrap; gap: 6px 20px; margin-top: 14px; font-size: 14px; }
-.project-links a { text-underline-offset: 3px; }
-.project-links a:hover { color: var(--active); }
+.project-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+.link-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 36px;
+  padding: 0 16px;
+  border: 1px solid var(--ink);
+  border-radius: 999px;
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: none;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+.link-btn svg { width: 15px; height: 15px; fill: currentColor; flex: none; }
+.link-btn:hover { background: var(--ink); color: var(--bg); }
+.project-links-sm { margin-top: 10px; gap: 8px; }
+.project-links-sm .link-btn { height: 30px; padding: 0 12px; font-size: 13px; }
 .project-media {
   margin: 0;
   aspect-ratio: 350 / 236;

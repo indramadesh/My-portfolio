@@ -38,7 +38,8 @@ window.SITE = {
     { label: "GitHub",   url: "https://github.com/indramadesh",                            icon: "github" }
   ],
 
-  /* ---------------- Projects (Projects page + Resume page) ---------------- */
+  /* ---------------- Projects (Projects page + Resume page) ----------------
+     github / demo: paste a URL to show a button, or leave "" to hide it.        */
   projects: [
     {
       title: "CyberShield 360",
@@ -52,7 +53,9 @@ window.SITE = {
       tags: ["Python", "FastAPI", "SQLAlchemy", "Alembic", "React", "TypeScript", "Tailwind CSS"],
       image: "assets/projects/cybershield-360.jpg",
       imageAlt: "CyberShield 360 landing page reading: Understand. Detect. Respond.",
-      links: []                                // e.g. [{ label: "View on GitHub", url: "https://github.com/..." }]
+      github: "",                              // e.g. "https://github.com/indramadesh/CyberShield360" (leave "" to hide)
+      demo: "",                                // e.g. "https://cybershield.vercel.app" (leave "" to hide)
+      links: []                                // any extra links, e.g. [{ label: "Docs", url: "https://..." }]
     },
     {
       title: "Smart Timetable Generator",
@@ -66,7 +69,9 @@ window.SITE = {
       tags: ["Python", "Flask", "PostgreSQL", "SQLite", "openpyxl", "Chart.js"],
       image: "assets/projects/timetable-generator.jpg",
       imageAlt: "A generated weekly timetable for class CSE-A, with a break after period 3 and a three-period lab block",
-      links: [{ label: "View on GitHub", url: "https://github.com/indramadesh/Timetable_Aplus" }]
+      github: "https://github.com/indramadesh/Timetable_Aplus",
+      demo: "",
+      links: []
     },
     {
       title: "Smart Classroom Attendance",
@@ -79,6 +84,8 @@ window.SITE = {
       tags: ["React", "Node.js", "Express", "PostgreSQL", "face-api.js", "html5-qrcode"],
       image: "",                               // no screenshot yet: shows "Screenshot coming soon"
       imageAlt: "",
+      github: "",
+      demo: "",
       links: []
     }
   ],

@@ -27,10 +27,24 @@
     linkedin: '<path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45z"/>',
     github: '<path d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57L9 21.07c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.08-.74.09-.73.09-.73 1.2.09 1.84 1.24 1.84 1.24 1.07 1.83 2.8 1.3 3.49 1 .1-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.64 1.66.24 2.88.12 3.18a4.65 4.65 0 0 1 1.23 3.22c0 4.61-2.8 5.63-5.48 5.92.42.36.81 1.1.81 2.22l-.01 3.29c0 .32.21.69.82.57A12 12 0 0 0 12 .3"/>',
     email: '<path d="M2 5h20v14H2V5zm2 2v.5l8 5 8-5V7H4zm16 2.85-8 5-8-5V17h16V9.85z"/>',
+    external: '<path d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42L17.59 5H14V3zM5 5h6v2H5v12h12v-6h2v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/>',
+    download: '<path d="M11 3h2v9.17l3.59-3.58L18 10l-6 6-6-6 1.41-1.41L11 12.17V3zM4 18h16v2H4v-2z"/>',
     link: '<path d="M10.6 13.4a1 1 0 0 1 0-1.4l3.4-3.4a1 1 0 1 1 1.4 1.4L12 13.4a1 1 0 0 1-1.4 0zM8.5 19a4.5 4.5 0 0 1-3.2-7.7l2.5-2.5a1 1 0 1 1 1.4 1.4l-2.5 2.5a2.5 2.5 0 0 0 3.5 3.5l2.5-2.5a1 1 0 1 1 1.4 1.4l-2.5 2.5A4.5 4.5 0 0 1 8.5 19zm7-5.5a1 1 0 0 1-.7-1.7l2.5-2.5a2.5 2.5 0 0 0-3.5-3.5l-2.5 2.5a1 1 0 1 1-1.4-1.4l2.5-2.5a4.5 4.5 0 0 1 6.4 6.4l-2.5 2.5a1 1 0 0 1-.8.2z"/>'
   };
   function icon(name) {
     return '<svg viewBox="0 0 24 24" aria-hidden="true">' + (ICONS[name] || ICONS.link) + "</svg>";
+  }
+
+  /* GitHub + demo + any extra links of a project, as small buttons */
+  function projectLinks(p, cls) {
+    var all = [];
+    if (p.github) all.push({ label: "GitHub", url: p.github, icon: "github" });
+    if (p.demo) all.push({ label: "Live demo", url: p.demo, icon: "external" });
+    list(p.links).forEach(function (l) { if (l && l.url) all.push({ label: l.label || "Link", url: l.url, icon: "link" }); });
+    if (!all.length) return "";
+    return '<div class="' + cls + '">' + all.map(function (l) {
+      return '<a class="link-btn" href="' + esc(l.url) + '"' + ext(l.url) + ">" + icon(l.icon) + "<span>" + esc(l.label) + "</span></a>";
+    }).join("") + "</div>";
   }
 
   /* ---------- header ---------- */
@@ -114,13 +128,14 @@
 
   function resume() {
     var out = '<div class="container page"><h1 class="page-title">Resume</h1>';
-    if (P.resumePdf) out += '<p class="resume-actions"><a href="' + esc(P.resumePdf) + '" download>Download PDF</a></p>';
+    if (P.resumePdf) out += '<p class="resume-actions"><a class="btn-dark" href="' + esc(P.resumePdf) + '" download>' + icon("download") + "<span>Download PDF</span></a></p>";
     if (list(S.projects).length) {
       out += section("r-projects", "Project<br />Experience", '<div class="timeline">' + list(S.projects).map(function (p) {
         return '<div class="tl-item"><p class="tl-date">' + esc(p.year) + '</p><div class="tl-body">' +
           '<h3 class="tl-title">' + esc(p.title) + (p.status ? ' <span class="status status-inline">' + esc(p.status) + "</span>" : "") + "</h3>" +
           (list(p.tags).length ? '<p class="tl-meta">' + list(p.tags).map(esc).join(", ") + "</p>" : "") +
           "<p>" + esc(p.resumeSummary || list(p.description)[0] || "") + "</p>" +
+          projectLinks(p, "project-links project-links-sm") +
           "</div></div>";
       }).join("") + "</div>");
     }
@@ -143,9 +158,7 @@
         (p.status ? '<span class="status">' + esc(p.status) + "</span>" : "") +
         paras(p.description) +
         (list(p.tags).length ? '<p class="project-tags">' + list(p.tags).map(esc).join(" · ") + "</p>" : "") +
-        (list(p.links).length ? '<div class="project-links">' + list(p.links).map(function (l) {
-          return '<a href="' + esc(l.url) + '"' + ext(l.url) + ">" + esc(l.label) + "</a>";
-        }).join("") + "</div>" : "") +
+        projectLinks(p, "project-links") +
         "</div>" + media + "</article>";
     }).join("") + "</div>";
   }

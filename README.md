@@ -15,6 +15,8 @@ Every page updates automatically.
 | Change your name, email, about text | Edit the `profile` section |
 | Add a project | Copy one `{ ... }` block in `projects`, paste it, change the text |
 | Remove a project | Delete its whole `{ ... }` block, including the comma after it |
+| Add a GitHub or demo link to a project | Paste the URL into that project's `github: ""` or `demo: ""` (empty hides the button) |
+| Add other project links | Add `{ label: "Docs", url: "..." }` to that project's `links` |
 | Add or remove skills | Edit the `items` lists in `skills`, or add a new group |
 | Add an achievement or certificate | Add a block to `achievements` (there's an example in the comments) |
 | Add a link | Add `{ label: "...", url: "..." }` to `links` |
@@ -40,10 +42,53 @@ Press F12 in the browser and the Console tab will show the line number.
 | `*.html` | Small page shells; no content inside |
 | `assets/` | Photo, résumé PDF, project screenshots |
 
-## Run and deploy
+## Run locally
 
-Open `index.html` in a browser. To publish, upload the folder to any static host:
-on Vercel, import it with no framework and no build command; on GitHub Pages, push it and enable Pages.
+Open `index.html` in a browser.
+
+## Deploy for free (GitHub Pages)
+
+GitHub Pages hosts static sites like this one for free, with no time limit, as long as
+the repository is public. HTTPS is included.
+
+**Before publishing:** add your résumé at `assets/resume.pdf` and your photo at
+`assets/photo.jpg`. Everything in a public repository is visible to anyone.
+
+1. **Commit your changes**
+   ```
+   git add -A
+   git commit -m "Update site"
+   ```
+2. **Create the repository.** Go to <https://github.com/new>, name it exactly
+   `indramadesh.github.io`, and set it to **Public**. With this name the site gets the short
+   address `https://indramadesh.github.io`; any other name gives `indramadesh.github.io/<repo-name>`.
+3. **Push the code**
+   ```
+   git remote add origin https://github.com/indramadesh/indramadesh.github.io.git
+   git push -u origin main
+   ```
+4. **Turn on Pages.** In the repository, open **Settings → Pages**. Under *Build and deployment*,
+   choose **Deploy from a branch**, branch **main**, folder **/ (root)**, then **Save**.
+
+About a minute later the site is live at **https://indramadesh.github.io**.
+
+### Updating the live site
+
+```
+git add -A
+git commit -m "Update content"
+git push
+```
+
+The live site updates within a minute or two.
+
+### Optional
+
+- **Custom domain:** buy a domain (e.g. `indramadesh.dev`, roughly ₹800–1,500 a year) and add it
+  under **Settings → Pages → Custom domain**. Hosting stays free.
+- **Other free hosts:** Cloudflare Pages, Netlify and Vercel also host static sites for free.
+  Connect the GitHub repository, choose no framework and no build command, and they redeploy
+  on every push.
 
 ## Contact form
 
